@@ -4,15 +4,16 @@ class PagesController < ApplicationController
   end
 
   def dice
-    @quantity = params.fetch("quantity")
-    @sides = params.fetch("sides")
+    @quantity = params.fetch("quantity").to_i
+    @sides = params.fetch("sides").to_i
 
     @rolls = []
 
-    @number_of_dice.times do
-      die = rand(1..@number_of_sides)
+    @quantity.times do
+      die = rand(1..@sides)
       @rolls.push(die)
     end
 
     render({:template => "pages_templates/dice"})
   end
+end
